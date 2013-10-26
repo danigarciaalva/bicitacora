@@ -24,6 +24,10 @@ import java.util.Locale;
  */
 public class getgps implements LocationListener {
 
+    public getgps(){
+        
+    }
+    
     @Override
     public void onLocationChanged(Location loc) {
         Toast.makeText(
@@ -34,7 +38,6 @@ public class getgps implements LocationListener {
         System.out.println(longitude);
         String latitude = "Latitude: " + loc.getLatitude();
         System.out.println(latitude);
-        db.save_point(latitude, longitude);
         /*-------to get City-Name from coordinates -------- */
         String cityName = null;
         Geocoder gcd = new Geocoder(global.contexto, Locale.getDefault());
