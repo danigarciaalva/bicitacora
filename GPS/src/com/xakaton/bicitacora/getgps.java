@@ -26,6 +26,7 @@ import java.util.Locale;
 public class getgps implements LocationListener {
 
     DBPunto db;
+    private int num_point = 0;
     public getgps(Context context){
         db = new DBPunto(context, "Punto", null , 1);
         db.init();
@@ -41,7 +42,8 @@ public class getgps implements LocationListener {
         System.out.println(longitude);
         String latitude = "Latitude: " + loc.getLatitude();
         System.out.println(latitude);
-        db.savePoint(loc.getLatitude(), loc.getLongitude(), new Date());
+        num_point++;
+        db.savePoint(num_point, loc.getLatitude(), loc.getLongitude(), new Date());
         /*-------to get City-Name from coordinates -------- */
         String cityName = null;
         Geocoder gcd = new Geocoder(global.contexto, Locale.getDefault());

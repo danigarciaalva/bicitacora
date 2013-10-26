@@ -1,3 +1,3 @@
-/home/xianur0/NetBeansProjects/GPS/bin/GPS-debug-unaligned.apk : \
-/home/xianur0/NetBeansProjects/GPS/bin/GPS.ap_ \
-/home/xianur0/NetBeansProjects/GPS/bin/classes.dex \
+/home/master/github/bicitacora/GPS/bin/GPS-debug-unaligned.apk : \
+/home/master/github/bicitacora/GPS/bin/GPS.ap_ \
+/home/master/github/bicitacora/GPS/bin/classes.dex \
