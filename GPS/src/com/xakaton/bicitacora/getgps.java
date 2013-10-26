@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,8 +25,10 @@ import java.util.Locale;
  */
 public class getgps implements LocationListener {
 
-    public getgps(){
-        
+    DBPunto db;
+    public getgps(Context context){
+        db = new DBPunto(context, "Punto", null , 1);
+        db.init();
     }
     
     @Override
@@ -38,6 +41,7 @@ public class getgps implements LocationListener {
         System.out.println(longitude);
         String latitude = "Latitude: " + loc.getLatitude();
         System.out.println(latitude);
+        db.savePoint(loc.getLatitude(), loc.getLongitude(), new Date());
         /*-------to get City-Name from coordinates -------- */
         String cityName = null;
         Geocoder gcd = new Geocoder(global.contexto, Locale.getDefault());

@@ -31,15 +31,16 @@ public class DBPunto extends SQLiteOpenHelper{
         sqld.execSQL(create);
     }
 
-    public void init(DBPunto db){
-        this.db= db.getWritableDatabase();
+    public void init(){
+        this.db= this.getWritableDatabase();
     }
     
     public void savePoint(double latitude, double longitude, Date date){
         if(db != null){
             db.execSQL("INSERT INTO Punto(latitud, longitud, fecha) VALUES ("+latitude+","+longitude+",'"+date+"');");
+            db.close();
         }
-        db.close();
+        
     }
     
     @Override
