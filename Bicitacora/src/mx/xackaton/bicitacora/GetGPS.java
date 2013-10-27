@@ -19,29 +19,25 @@ public class GetGPS implements LocationListener {
 
     DBPunto db;
     private static int num_point = 0;
-    private static int pista = 0;
-    public GetGPS(Context context){
-        db = new DBPunto(context, "Punto", null , 1);
-        db.init();
+    private int pista = 0;
+    public GetGPS(int pista, DBPunto db_punto){
+    	this.pista = pista;
+        this.db = db_punto;
     }
     
     @Override
     public void onLocationChanged(Location loc) {
-        Toast.makeText(
-                global.contexto,
-                "Location changed: Lat: " + loc.getLatitude() + " Lng: "
-                + loc.getLongitude(), Toast.LENGTH_SHORT).show();
-        String longitude = "Longitude: " + loc.getLongitude();
+    	double lat = loc.getLatitude();
+    	double lon = loc.getLongitude();
+        String longitude = "Longitude: " + lon;
         System.out.println(longitude);
-        String latitude = "Latitude: " + loc.getLatitude();
+        String latitude = "Latitude: " + lat;
         System.out.println(latitude);
         num_point++;
-        db.savePoint(pista, num_point, loc.getLatitude(), loc.getLongitude(), new Date());   
+        //db.savePoint(pista, num_point, loc.getLatitude(), loc.getLongitude(), new Date());
+        System.out.println("Pista: "+pista+" Num punto: "+num_point+" Latitud: "+lat+" Longitud: "+lon);
     }
     
-    public void toFinish(){
-        db.close();
-    }
     @Override
     public void onProviderDisabled(String provider) {
     }

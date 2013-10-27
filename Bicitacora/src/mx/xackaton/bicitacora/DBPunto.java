@@ -7,6 +7,8 @@ package mx.xackaton.bicitacora;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
 import java.util.Date;
 
 /**
@@ -34,8 +36,12 @@ public class DBPunto extends SQLiteOpenHelper{
     
     public void savePoint(int id_pista, int num_point, double latitude, double longitude, Date date){
         if(db != null){
-            db.execSQL("INSERT INTO Punto(id_pista, num, latitud, longitud, fecha) VALUES ("+id_pista+","+num_point+","+latitude+","+longitude+",'"+date+"');");
-            System.out.println("Se guardo la coordenada: "+latitude+", "+longitude);
+        	try{
+	            db.execSQL("INSERT INTO Punto(id_pista, num, latitud, longitud, fecha) VALUES ("+id_pista+","+num_point+","+latitude+","+longitude+",'"+date+"');");
+	            Toast.makeText(global.contexto, "Se guardo la coordenada: Lat: "+latitude+" Lon: "+longitude, Toast.LENGTH_SHORT).show();
+        	}catch(Exception e){
+        		Toast.makeText(global.contexto, e.getCause().toString(), Toast.LENGTH_SHORT).show();
+        	}
         }
         
     }
