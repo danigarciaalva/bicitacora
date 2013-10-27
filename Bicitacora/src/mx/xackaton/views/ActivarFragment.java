@@ -73,7 +73,7 @@ public class ActivarFragment extends Fragment{
 						if (cursor != null)
 							pista = db.getLastRoad().getInt(0)+1;
 						locationListener = new GetGPS(pista, db_punto);
-			        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5, locationListener);
+			        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
 					}else{
 						start_stop.setImageResource(R.drawable.botonactivara);
 						started = false;
