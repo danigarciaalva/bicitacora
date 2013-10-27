@@ -18,6 +18,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.widget.Toast;
+
 /**
  *
  * @author xianur0
@@ -116,7 +118,7 @@ public class SERVER {
             JSONObject jObject = new JSONObject(a.toString());
             String error = jObject.getString("error");
             System.out.println(error);
-            System.out.println(jObject.getString("msg"));
+            Toast.makeText(global.contexto, "Errores: "+jObject.getString("msg"), Toast.LENGTH_SHORT).show();
         } catch (Exception ex) {
         	ex.printStackTrace();
             //Logger.getLogger(SERVER.class.getName()).log(Level.SEVERE, null, ex);

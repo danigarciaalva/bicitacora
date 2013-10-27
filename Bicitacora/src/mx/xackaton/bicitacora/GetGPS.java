@@ -18,7 +18,6 @@ import java.util.Date;
 public class GetGPS implements LocationListener {
 
     DBPunto db;
-    private static int num_point = 0;
     private int pista = 0;
     public GetGPS(int pista, DBPunto db_punto){
     	this.pista = pista;
@@ -30,9 +29,8 @@ public class GetGPS implements LocationListener {
     	double lat = loc.getLatitude();
     	double lon = loc.getLongitude();
     	double alt = loc.getAltitude();
-        num_point++;
-        db.savePoint(pista, num_point, lat, lon, alt, new Date());
-        Toast.makeText(global.contexto,"Pista: "+pista+" Num punto: "+num_point+" Latitud: "+lat+" Longitud: "+lon+" Altitud: "+alt, Toast.LENGTH_SHORT).show();
+        db.savePoint(pista, lat, lon, alt, new Date());
+        Toast.makeText(global.contexto,"Pista: "+pista+" Latitud: "+lat+" Longitud: "+lon+" Altitud: "+alt, Toast.LENGTH_SHORT).show();
     }
     
     @Override

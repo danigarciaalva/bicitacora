@@ -35,10 +35,10 @@ public class DBPunto extends SQLiteOpenHelper{
         this.db= this.getWritableDatabase();
     }
     
-    public void savePoint(int id_pista, int num_point, double latitude, double longitude, double altitude, Date date){
+    public void savePoint(int id_pista, double latitude, double longitude, double altitude, Date date){
         if(db != null){
         	try{
-	            db.execSQL("INSERT INTO Punto(id_pista, num, latitud, longitud, altitud, fecha) VALUES ("+id_pista+","+num_point+","+latitude+","+longitude+","+altitude+",'"+date+"');");
+	            db.execSQL("INSERT INTO Punto(id_pista, latitud, longitud, altitud, fecha) VALUES ("+id_pista+","+latitude+","+longitude+","+altitude+",'"+date+"');");
 	            Toast.makeText(global.contexto, "Se guardo la coordenada: Lat: "+latitude+" Lon: "+longitude, Toast.LENGTH_SHORT).show();
         	}catch(Exception e){
         		e.printStackTrace();
