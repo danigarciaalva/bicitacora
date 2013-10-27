@@ -48,13 +48,13 @@ public class DBPista extends SQLiteOpenHelper{
         
     }
     
-    public int getLastRoad(){
+    public Cursor getLastRoad(){
     	Cursor cursor =  db.rawQuery("SELECT * FROM Pista WHERE id = (SELECT MAX(id) FROM Pista)", null);
     	if (cursor.getCount() > 0){
     		cursor.moveToLast();
-    		return cursor.getInt(0);
+    		return cursor;
     	}
-    	return -1;
+    	return null;
     }
     
     public void close(){

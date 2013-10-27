@@ -34,7 +34,7 @@ public class GetGPS implements LocationListener {
         String latitude = "Latitude: " + lat;
         System.out.println(latitude);
         num_point++;
-        //db.savePoint(pista, num_point, loc.getLatitude(), loc.getLongitude(), new Date());
+        db.savePoint(pista, num_point, loc.getLatitude(), loc.getLongitude(), new Date());
         Toast.makeText(global.contexto,"Pista: "+pista+" Num punto: "+num_point+" Latitud: "+lat+" Longitud: "+lon, Toast.LENGTH_SHORT).show();
     }
     

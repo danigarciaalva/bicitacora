@@ -5,6 +5,7 @@
 package mx.xackaton.bicitacora;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -46,6 +47,9 @@ public class DBPunto extends SQLiteOpenHelper{
         
     }
     
+    public Cursor getPointsByRoad(int road){
+    	return db.rawQuery("SELECT * FROM Punto WHERE id_pista = "+road, null);
+    }
     public void close(){
         if(db != null)
             db.close();
