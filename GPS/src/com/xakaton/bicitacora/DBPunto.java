@@ -17,10 +17,7 @@ public class DBPunto extends SQLiteOpenHelper{
     String create = "CREATE TABLE Punto (id INTEGER PRIMARY KEY AUTOINCREMENT, id_pista INTEGER, num INTEGER,latitud REAL, longitud REAL, fecha TEXT)";
     
     SQLiteDatabase db;
-    
-    public static void save_point(String lat,String lon){
-        // do... anything
-    }
+   
 
     public DBPunto(Context contexto, String tabla, SQLiteDatabase.CursorFactory cursor, int version){
         super(contexto, tabla, cursor, version);
