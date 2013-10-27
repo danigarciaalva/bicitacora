@@ -119,7 +119,7 @@ public class SERVER {
             System.out.println(error);
             System.out.println(jObject.getString("msg"));
         } catch (Exception ex) {
-        	System.out.println( ex.getCause().toString());
+        	ex.printStackTrace();
             //Logger.getLogger(SERVER.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
