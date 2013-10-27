@@ -1,4 +1,5 @@
 package mx.xackaton.views;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.json.JSONArray;
@@ -7,6 +8,7 @@ import org.json.JSONObject;
 import mx.xackaton.bicitacora.DBPista;
 import mx.xackaton.bicitacora.DBPunto;
 import mx.xackaton.bicitacora.GetGPS;
+import mx.xackaton.bicitacora.SERVER;
 import mx.xackaton.bicitacora.global;
 
 import com.example.android.effectivenavigation.R;
@@ -77,7 +79,7 @@ public class ActivarFragment extends Fragment{
 						started = false;
 						hora_fin = new Date();
 						locationManager.removeUpdates(locationListener);
-						db.save_road(pista, hora_inicio, hora_fin, 0, 0);
+						db.save_road(pista, hora_inicio, hora_fin, 0.0, 0.0);
 						Cursor cursor = db.getLastRoad();
 						send_data(cursor);
 						db.close();
@@ -89,11 +91,13 @@ public class ActivarFragment extends Fragment{
         
         public void send_data(Cursor cursor){
         	try{
-        		JSONObject json_pista = new JSONObject();
-        		json_pista.put("usuario", "Daniel");
-        		json_pista.put("pista", cursor.getInt(0));
-        		json_pista.put("hora_inicio", cursor.getString(1));
-        		json_pista.put("hora_fin", cursor.getString(2));
+        		final JSONObject json_pista = new JSONObject();
+        		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        		String ini = format.format(new Date(cursor.getString(1)));
+        		String fin = format.format(new Date(cursor.getString(2)));
+        		System.out.println("Inicio: "+ini+" Fin: "+fin);
+        		json_pista.put("hora_inicio", ini);
+        		json_pista.put("hora_fin", fin);
         		JSONArray puntos = new JSONArray();
         		Cursor aux = db_punto.getPointsByRoad(cursor.getInt(0));
         		if (aux.getCount() > 0){
@@ -113,6 +117,19 @@ public class ActivarFragment extends Fragment{
 	        		}
         		}
         		json_pista.put("puntos", puntos);
+        		json_pista.put("longitud", cursor.getFloat(4));
+        		json_pista.put("desplazamiento", cursor.getFloat(3));
+        		Thread t = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						System.out.println("Entro a la enviada al servidor");
+						SERVER server = new SERVER();
+						server.register("Daniel Garcia", "M", "2013-04-05", "atbga@hotmail.com", "swordfish");
+						server.road(json_pista);
+					}
+				});
+        		t.start();
         		System.out.println(json_pista.toString());
         	}catch(Exception e){
         		e.printStackTrace();

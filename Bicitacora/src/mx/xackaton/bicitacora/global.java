@@ -12,5 +12,5 @@ import android.content.Context;
  */
 public class global {
     public static Context contexto;
-    
+    public static String token;
 }

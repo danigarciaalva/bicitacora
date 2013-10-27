@@ -39,7 +39,7 @@ public class DBPista extends SQLiteOpenHelper{
         if(db != null){
         	try{
 	            db.execSQL("INSERT INTO Pista(hora_inicio, hora_fin, desplazamiento, longitud) VALUES ('"+hora_inicio.toString()+
-	            	"','"+hora_fin+"',"+desplazamiento+","+longitud+");");
+	            	"','"+hora_fin.toString()+"',"+desplazamiento+","+longitud+");");
 	            Toast.makeText(global.contexto, "Se guardo la pista: "+pista, Toast.LENGTH_SHORT).show();
         	}catch(Exception e){
         		Toast.makeText(global.contexto, e.getCause().toString(), Toast.LENGTH_SHORT).show();
