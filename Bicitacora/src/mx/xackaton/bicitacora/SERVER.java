@@ -24,9 +24,15 @@ import org.json.JSONObject;
  */
 public class SERVER {
 
-    String server = "http://192.168.1.66:8000";
+    String server = "http://bicitacora.developingo.webfactional.com";
 
-    public void login(String email, String password) {
+    public class UDP{
+    	public int CODIGO;
+    	public String MSG;
+    	public String TOKEN;
+    }
+    
+    public UDP login(String email, String password) {
         String url = server + "/api/login";
 
         HttpClient httpclient = new DefaultHttpClient();
@@ -38,16 +44,20 @@ public class SERVER {
             httpost.setEntity(new UrlEncodedFormEntity(pairs));
             HttpResponse response = httpclient.execute(httpost);
             StringBuilder a = inputStreamToString(response.getEntity().getContent());
-            System.out.println("Tacos: "+a.toString());
+            UDP u = new UDP();
             JSONObject jObject = new JSONObject(a.toString());
-            String error = jObject.getString("error");
-            global.token = jObject.getString("token");
-            System.out.println("Termino bien :DDDD");
-        } catch (JSONException ex) {
-            //Logger.getLogger(SERVER.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            //Logger.getLogger(SERVER.class.getName()).log(Level.SEVERE, null, ex);
+            u.CODIGO = jObject.getInt("error");
+            if (u.CODIGO != 0){
+            	u.MSG = jObject.getString("msg");
+            }else{
+            	u.TOKEN = jObject.getString("token");
+            }
+            System.out.println(u.CODIGO);
+            return u;
+        } catch (Exception e) {
+        	e.printStackTrace();
         }
+        return null;
     }
 
     private StringBuilder inputStreamToString(InputStream is) {
