@@ -79,7 +79,7 @@ public class ActivarFragment extends Fragment{
 						started = false;
 						hora_fin = new Date();
 						locationManager.removeUpdates(locationListener);
-						db.save_road(pista, hora_inicio, hora_fin, db.distance(pista, db_punto), 0.0);
+						db.save_road(pista, hora_inicio, hora_fin,db.longitud(pista, db_punto) , db.distance(pista, db_punto));
 						Cursor cursor = db.getLastRoad();
 						send_data(cursor);
 						db.close();
@@ -100,14 +100,15 @@ public class ActivarFragment extends Fragment{
         		json_pista.put("hora_fin", fin);
         		JSONArray puntos = new JSONArray();
         		Cursor aux = db_punto.getPointsByRoad(cursor.getInt(0));
+        		System.out.println(aux.getCount());
         		if (aux.getCount() > 0){
 	        		aux.moveToFirst();
 	        		JSONObject punto = new JSONObject();
 	        		for (int i = 0; i < cursor.getCount(); i++){
 	        			if(!aux.isNull(i)){
-	        				punto.put("latitud", cursor.getInt(3));
-	        				punto.put("longitud", cursor.getFloat(4));
-	        				punto.put("altitud", cursor.getFloat(5));
+	        				punto.put("latitud", cursor.getFloat(1));
+	        				punto.put("longitud", cursor.getFloat(2));
+	        				punto.put("altitud", cursor.getFloat(3));
 	        				puntos.put(punto);
 	        				punto = new JSONObject();
 	        				aux.moveToNext();
@@ -125,7 +126,6 @@ public class ActivarFragment extends Fragment{
 					public void run() {
 						System.out.println("Entro a la enviada al servidor");
 						SERVER server = new SERVER();
-						server.register("Daniel Garcia", "M", "2013-04-05", "atbga@hotmail.com", "swordfish");
 						server.road(json_pista);
 					}
 				});
