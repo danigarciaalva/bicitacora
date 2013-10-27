@@ -17,7 +17,7 @@ import java.util.Date;
  * @author xianur0
  */
 public class DBPunto extends SQLiteOpenHelper{
-    String create = "CREATE TABLE Punto (id INTEGER PRIMARY KEY AUTOINCREMENT, id_pista INTEGER, num INTEGER,latitud REAL, longitud REAL, fecha TEXT)";
+    String create = "CREATE TABLE Punto (id INTEGER PRIMARY KEY AUTOINCREMENT, id_pista INTEGER, latitud REAL, longitud REAL, altitud REAL, fecha TEXT)";
     
     SQLiteDatabase db;
    
@@ -35,10 +35,10 @@ public class DBPunto extends SQLiteOpenHelper{
         this.db= this.getWritableDatabase();
     }
     
-    public void savePoint(int id_pista, int num_point, double latitude, double longitude, Date date){
+    public void savePoint(int id_pista, int num_point, double latitude, double longitude, double altitude, Date date){
         if(db != null){
         	try{
-	            db.execSQL("INSERT INTO Punto(id_pista, num, latitud, longitud, fecha) VALUES ("+id_pista+","+num_point+","+latitude+","+longitude+",'"+date+"');");
+	            db.execSQL("INSERT INTO Punto(id_pista, num, latitud, longitud, altitud, fecha) VALUES ("+id_pista+","+num_point+","+latitude+","+longitude+","+altitude+",'"+date+"');");
 	            Toast.makeText(global.contexto, "Se guardo la coordenada: Lat: "+latitude+" Lon: "+longitude, Toast.LENGTH_SHORT).show();
         	}catch(Exception e){
         		Toast.makeText(global.contexto, e.getCause().toString(), Toast.LENGTH_SHORT).show();

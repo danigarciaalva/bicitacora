@@ -105,9 +105,9 @@ public class ActivarFragment extends Fragment{
 	        		JSONObject punto = new JSONObject();
 	        		for (int i = 0; i < cursor.getCount(); i++){
 	        			if(!aux.isNull(i)){
-	        				punto.put("num", cursor.getInt(1));
-	        				punto.put("lat", cursor.getFloat(2));
-	        				punto.put("long", cursor.getFloat(3));
+	        				punto.put("latitud", cursor.getInt(3));
+	        				punto.put("longitud", cursor.getFloat(4));
+	        				punto.put("altitud", cursor.getFloat(5));
 	        				puntos.put(punto);
 	        				punto = new JSONObject();
 	        				aux.moveToNext();

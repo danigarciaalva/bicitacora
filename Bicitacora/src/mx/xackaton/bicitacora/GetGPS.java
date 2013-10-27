@@ -29,13 +29,10 @@ public class GetGPS implements LocationListener {
     public void onLocationChanged(Location loc) {
     	double lat = loc.getLatitude();
     	double lon = loc.getLongitude();
-        String longitude = "Longitude: " + lon;
-        System.out.println(longitude);
-        String latitude = "Latitude: " + lat;
-        System.out.println(latitude);
+    	double alt = loc.getAltitude();
         num_point++;
-        db.savePoint(pista, num_point, loc.getLatitude(), loc.getLongitude(), new Date());
-        Toast.makeText(global.contexto,"Pista: "+pista+" Num punto: "+num_point+" Latitud: "+lat+" Longitud: "+lon, Toast.LENGTH_SHORT).show();
+        db.savePoint(pista, num_point, lat, lon, alt, new Date());
+        Toast.makeText(global.contexto,"Pista: "+pista+" Num punto: "+num_point+" Latitud: "+lat+" Longitud: "+lon+" Altitud: "+alt, Toast.LENGTH_SHORT).show();
     }
     
     @Override
