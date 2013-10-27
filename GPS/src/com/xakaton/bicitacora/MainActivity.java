@@ -15,7 +15,7 @@ public class MainActivity extends Activity
         global.contexto = this.getApplicationContext();
         setContentView(R.layout.main);
         LocationManager locationManager = (LocationManager) getSystemService(global.contexto.LOCATION_SERVICE);
-        LocationListener locationListener = new getgps(this);
+        LocationListener locationListener = new GetGPS(this);
         locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
     }

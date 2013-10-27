@@ -23,11 +23,12 @@ import java.util.Locale;
  *
  * @author xianur0
  */
-public class getgps implements LocationListener {
+public class GetGPS implements LocationListener {
 
     DBPunto db;
-    private int num_point = 0;
-    public getgps(Context context){
+    private static int num_point = 0;
+    private static int pista = 0;
+    public GetGPS(Context context){
         db = new DBPunto(context, "Punto", null , 1);
         db.init();
     }
@@ -43,7 +44,7 @@ public class getgps implements LocationListener {
         String latitude = "Latitude: " + loc.getLatitude();
         System.out.println(latitude);
         num_point++;
-        db.savePoint(num_point, loc.getLatitude(), loc.getLongitude(), new Date());
+        db.savePoint(pista, num_point, loc.getLatitude(), loc.getLongitude(), new Date());
         /*-------to get City-Name from coordinates -------- */
         String cityName = null;
         Geocoder gcd = new Geocoder(global.contexto, Locale.getDefault());
