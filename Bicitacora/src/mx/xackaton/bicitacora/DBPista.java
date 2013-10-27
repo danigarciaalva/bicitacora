@@ -57,6 +57,29 @@ public class DBPista extends SQLiteOpenHelper{
     	return null;
     }
     
+    public double distance(int pista, DBPunto db_punto){
+    	Cursor cursor = db_punto.getPointsByRoad(pista);
+    	double distance = 0.0;
+    	if ( cursor.getCount() > 0){
+    		cursor.moveToFirst();
+    		double lat = cursor.getDouble(2);
+    		double lon = cursor.getDouble(3);
+    		for(int i = 1; i < cursor.getCount(); i++){
+    			if(!cursor.isNull(i)){
+    				cursor.moveToPosition(i);
+    				double lat_aux = cursor.getDouble(2);
+    				double lon_aux = cursor.getDouble(3);
+    				double R = 6371;
+    				distance += Math.acos(Math.sin(lat) * Math.sin(lat_aux) +
+    									Math.cos(lat) * Math.cos(lat_aux) * 
+    									Math.cos(lon_aux - lon)) * R;
+    				lat = lat_aux;
+    				lon = lon_aux;
+    			}
+    		}
+    	}
+    	return distance;
+    }
     public void close(){
         if(db != null)
             db.close();

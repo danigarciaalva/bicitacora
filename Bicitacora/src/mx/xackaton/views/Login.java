@@ -33,7 +33,7 @@ public class Login extends Activity{
 		
 		correo = (EditText)findViewById(R.id.correo);
 		password = (EditText)findViewById(R.id.password);
-		
+		registro = (Button)findViewById(R.id.registro);
 		entrar = (Button)findViewById(R.id.entrar);
 		entrar.setOnClickListener(new OnClickListener() {
 			
