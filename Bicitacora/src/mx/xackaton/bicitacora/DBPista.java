@@ -84,6 +84,7 @@ public class DBPista extends SQLiteOpenHelper{
     public double longitud(int pista, DBPunto db_punto){
     	Cursor cursor = db_punto.getPointsByRoad(pista);
     	double longitud = 0.0;
+    	Toast.makeText(global.contexto, "Cantidad de puntos: "+cursor.getCount(), Toast.LENGTH_SHORT).show();
     	if ( cursor.getCount() > 1){
     		cursor.moveToFirst();
     		double lat = cursor.getDouble(2);

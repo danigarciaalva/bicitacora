@@ -30,7 +30,6 @@ public class GetGPS implements LocationListener {
     	double lon = loc.getLongitude();
     	double alt = loc.getAltitude();
         db.savePoint(pista, lat, lon, alt, new Date());
-        Toast.makeText(global.contexto,"Pista: "+pista+" Latitud: "+lat+" Longitud: "+lon+" Altitud: "+alt, Toast.LENGTH_SHORT).show();
     }
     
     @Override

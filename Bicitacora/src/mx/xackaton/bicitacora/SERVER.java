@@ -114,13 +114,12 @@ public class SERVER {
             httpost.setEntity(new UrlEncodedFormEntity(pairs));
             HttpResponse response = httpclient.execute(httpost);
             StringBuilder a = inputStreamToString(response.getEntity().getContent());
-            System.out.println("Tacos: "+a.toString());
             JSONObject jObject = new JSONObject(a.toString());
             String error = jObject.getString("error");
             System.out.println(error);
-            Toast.makeText(global.contexto, "Errores: "+jObject.getString("msg"), Toast.LENGTH_SHORT).show();
+            System.out.println(jObject.getString("msg"));
         } catch (Exception ex) {
-        	ex.printStackTrace();
+        	System.out.println( ex.getCause().toString());
             //Logger.getLogger(SERVER.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

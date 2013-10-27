@@ -26,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 /**
@@ -104,11 +105,11 @@ public class ActivarFragment extends Fragment{
         		if (aux.getCount() > 0){
 	        		aux.moveToFirst();
 	        		JSONObject punto = new JSONObject();
-	        		for (int i = 0; i < cursor.getCount(); i++){
+	        		for (int i = 0; i < aux.getCount(); i++){
 	        			if(!aux.isNull(i)){
-	        				punto.put("latitud", cursor.getFloat(1));
-	        				punto.put("longitud", cursor.getFloat(2));
-	        				punto.put("altitud", cursor.getFloat(3));
+	        				punto.put("latitud", aux.getFloat(1));
+	        				punto.put("longitud", aux.getFloat(2));
+	        				punto.put("altitud", aux.getFloat(3));
 	        				puntos.put(punto);
 	        				punto = new JSONObject();
 	        				aux.moveToNext();
@@ -130,9 +131,12 @@ public class ActivarFragment extends Fragment{
 					}
 				});
         		t.start();
-        		System.out.println(json_pista.toString());
+        		try{
+        			t.join();
+        		}catch(Exception e){}
+        		Toast.makeText(global.contexto, "Ya se envio al servidor", Toast.LENGTH_SHORT).show();
         	}catch(Exception e){
-        		e.printStackTrace();
+        		Toast.makeText(global.contexto, e.getCause().toString(), Toast.LENGTH_LONG).show();
         	}
         }
         
