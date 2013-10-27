@@ -38,8 +38,6 @@
 	     android:text="Entrar"
 	     android:textSize="13sp" 
 	     android:background="#ee4024"
-        android:padding="15px"
-        android:text="Registrar"
         android:textColor="#fff" 
 	     />
 
