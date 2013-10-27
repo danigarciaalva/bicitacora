@@ -80,7 +80,7 @@ public class ActivarFragment extends Fragment{
 						hora_fin = new Date();
 						locationManager.removeUpdates(locationListener);
 						db.save_road(pista, hora_inicio, hora_fin, 0.0, 0.0);
-						Cursor cursor = db.getLastRoad();
+						Cursor cursor = db.getLastRoad(); 
 						send_data(cursor);
 						db.close();
 						db_punto.close();
